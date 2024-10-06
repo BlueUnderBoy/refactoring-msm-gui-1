@@ -17,14 +17,23 @@ class Movie < ApplicationRecord
     #return self.title + " (" + self.year.to_s + ")"
 
     return "#{self.title} (#{self.year})"
-end
+  end
 
-def the_director
-  d_id = self.director_id
+  def characters
+    my_id = self.id
 
-  matching_directors = Director.where({:id => d_id})
+    matching_characters = Character.where({:movie_id => my_id})
 
-  the_director = matching_directors.at(0)
+    return matching_characters
+  end
 
-  return the_director
+  def the_director
+    d_id = self.director_id
+
+    matching_directors = Director.where({:id => d_id})
+
+    the_director = matching_directors.at(0)
+
+      return the_director
+  end
 end
